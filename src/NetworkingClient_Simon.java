@@ -26,13 +26,27 @@ public class NetworkingClient_Simon {
 
                 // Create an input stream of the client socket
                 InputStream clientIn = client.getInputStream();
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(clientIn));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientIn));
 
                 System.out.println("Enter your name. Type Bye to exit");
 
                 // Read data from the standard input devices and write it
-                // to the output stream of the clinet socket.
-                message = stdIn.readLine().trim();
+                // to the output stream of the clinet socket
+                message = bufferedReader.readLine().trim();
+                printWriter.println(message);
+
+                // Read data from the input stream of the client socket
+                System.out.println("Message returned from the server = " + bufferedReader.readLine());
+
+                printWriter.close();
+                bufferedReader.close();
+                client.close();
+
+                // Stop the operation
+                if (message.equalsIgnoreCase("Bye"))
+                {
+                    break;
+                }
 
             } catch (IOException ie) {
                 System.out.println("I/O error " + ie);
