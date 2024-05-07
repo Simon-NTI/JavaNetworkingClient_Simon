@@ -20,7 +20,7 @@ public class NetworkingClient_Simon {
                 client = new Socket(InetAddress.getLocalHost(), portnumber);
                 System.out.println("Client socket is created " + client);
 
-                // Create an output strea, of the client socket
+                // Create an output stream, of the client socket
                 OutputStream clientOut = client.getOutputStream();
                 PrintWriter printWriter = new PrintWriter(clientOut, true);
 
@@ -28,11 +28,14 @@ public class NetworkingClient_Simon {
                 InputStream clientIn = client.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientIn));
 
+                // Create bufferedReader for standard input
+                BufferedReader standardInput =  new BufferedReader(new InputStreamReader(System.in));
+
                 System.out.println("Enter your name. Type Bye to exit");
 
                 // Read data from the standard input devices and write it
-                // to the output stream of the clinet socket
-                message = bufferedReader.readLine().trim();
+                // to the output stream of the client socket
+                message = standardInput.readLine().trim();
                 printWriter.println(message);
 
                 // Read data from the input stream of the client socket
